@@ -24,5 +24,25 @@ pipeline {
         }
       }
     }
+
+    stage('Push the artifacts'){
+      steps{
+        script{
+          sh '''
+          echo 'Push to Repo'
+          docker push abhishekf5/cicd-e2e:${BUILD_NUMBER}
+          '''
+        }
+      }
+    }
+
+    stage('Checkout KBS manifest SCM'){
+      steps{
+        git credentialsId: '',
+        url: '',
+        branch: 'main'
+      }
+    }
+    
   }
 }
